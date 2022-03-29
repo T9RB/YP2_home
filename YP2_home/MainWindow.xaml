@@ -1,0 +1,40 @@
+﻿<Window x:Class="YP2_home.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YP2_home"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="300" Width="500">
+    <!--<Window.DataContext>
+        <local:MainVM/>
+    </Window.DataContext>-->
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <local:VM_Auth x:Key="cooks"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource cooks}">
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <StackPanel>
+                <TextBlock Text="Авторизация" TextAlignment="Center" Margin="0 0 0 10"/>
+                <DockPanel LastChildFill="True" Margin="0,0,0,15">
+                    <TextBlock Text="Логин:   " />
+                    <TextBox x:Name="Log_Box" Text="{Binding Login }"/>
+                </DockPanel>
+                <DockPanel LastChildFill="True" Margin="0 0 0 15">
+                    <TextBlock Text="Пароль: "/>
+                    <TextBox Name="PassBox" Text="{Binding Password}"/>
+                </DockPanel>
+                <Button 
+                    x:Name="Button1" 
+                    Content="Войти" 
+                    Command="{Binding Auth}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
