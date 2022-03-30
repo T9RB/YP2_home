@@ -25,7 +25,7 @@ public class CooksVM : ViewModelCafe
                        var order_st = SelectedOrder;
                        if (order_st == null)
                        {
-                           Environment.Exit(1);
+                           return;
                        }
 
                        if (order_st != null)

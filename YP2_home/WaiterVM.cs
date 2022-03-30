@@ -28,7 +28,7 @@ public class WaiterVM : ViewModelCafe
                        var order_st = SOrder;
                        if (order_st == null)
                        {
-                           Environment.Exit(1);
+                           return;
                        }
 
                        if (order_st != null)

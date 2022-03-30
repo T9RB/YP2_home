@@ -40,7 +40,7 @@ public class VM_Auth : ViewModelCafe
 
                        if (selUs == null)
                        {
-                           Environment.Exit(1);
+                           return;
                        }
 
                        if (selUs.IdRole == 1)

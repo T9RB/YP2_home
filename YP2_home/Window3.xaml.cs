@@ -24,6 +24,5 @@ namespace YP2_home
             InitializeComponent();
             DataContext = new Waiter2VM();
         }
-
     }
 }
