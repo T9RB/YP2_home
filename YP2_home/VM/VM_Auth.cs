@@ -46,11 +46,13 @@ public class VM_Auth : ViewModelCafe
                        if (selUs.IdRole == 1)
                        {
                            new Window1().Show();
+                           Helper.id_user = 1;
                        }
 
                        if (selUs.IdRole == 2)
                        {
                            new Window2().Show();
+                           Helper.id_user = 2;
                        }
                        
                            

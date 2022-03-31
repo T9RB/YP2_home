@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:YP2_home"
         mc:Ignorable="d"
         Title="Авторизация" Height="300" Width="500">
-    <!--<Window.DataContext>
-        <local:MainVM/>
-    </Window.DataContext>-->
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />

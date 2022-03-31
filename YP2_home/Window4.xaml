@@ -1,0 +1,17 @@
+﻿<Window x:Class="YP2_home.Window4"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YP2_home"
+        mc:Ignorable="d"
+        Title="Добавление заказа" Height="130" Width="350">
+    <Window.Resources>
+        <local:Waiter2VM x:Key="Order)"/>
+    </Window.Resources>
+    <Grid>
+        <TextBlock
+            Margin="48,29,48,28"
+            Text="Заказ добавлен" FontSize="32"/>
+    </Grid>
+</Window>

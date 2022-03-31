@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
 
 namespace YP2_home
 {
-    public partial class Status 
+    public partial class Status
     {
         public Status()
         {

@@ -17,6 +17,7 @@ namespace YP2_home
         }
 
         public virtual DbSet<Dish> Dishes { get; set; } = null!;
+        public virtual DbSet<DishInOrder> DishInOrders { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Status> Statuses { get; set; } = null!;
@@ -40,9 +41,7 @@ namespace YP2_home
 
                 entity.ToTable("Dish");
 
-                entity.Property(e => e.IdDish)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID_Dish");
+                entity.Property(e => e.IdDish).HasColumnName("ID_Dish");
 
                 entity.Property(e => e.NameDish)
                     .HasMaxLength(50)
@@ -55,25 +54,42 @@ namespace YP2_home
                     .HasColumnName("Time_Dish");
             });
 
+            modelBuilder.Entity<DishInOrder>(entity =>
+            {
+                entity.HasKey(e => e.IdDio);
+
+                entity.ToTable("Dish_In_Order");
+
+                entity.Property(e => e.IdDio).HasColumnName("ID_DIO");
+
+                entity.Property(e => e.IdDish).HasColumnName("ID_Dish");
+
+                entity.Property(e => e.IdOrder).HasColumnName("ID_Order");
+
+                entity.HasOne(d => d.IdDishNavigation)
+                    .WithMany(p => p.DishInOrders)
+                    .HasForeignKey(d => d.IdDish)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Dish_In_Order_Dish");
+
+                entity.HasOne(d => d.IdOrderNavigation)
+                    .WithMany(p => p.DishInOrders)
+                    .HasForeignKey(d => d.IdOrder)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Dish_In_Order_Order");
+            });
+
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order");
 
-                entity.Property(e => e.OrderId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Order_ID");
-
-                entity.Property(e => e.IdDish).HasColumnName("ID_Dish");
+                entity.Property(e => e.OrderId).HasColumnName("Order_ID");
 
                 entity.Property(e => e.IdStatus).HasColumnName("ID_Status");
 
                 entity.Property(e => e.IdUsers).HasColumnName("ID_Users");
 
-                entity.HasOne(d => d.IdDishNavigation)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.IdDish)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_Dish");
+                entity.Property(e => e.Sum).HasColumnType("money");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Orders)
@@ -120,9 +136,7 @@ namespace YP2_home
             {
                 entity.HasKey(e => e.IdUser);
 
-                entity.Property(e => e.IdUser)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID_User");
+                entity.Property(e => e.IdUser).HasColumnName("ID_User");
 
                 entity.Property(e => e.IdRole).HasColumnName("ID_Role");
 

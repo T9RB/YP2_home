@@ -7,7 +7,7 @@ namespace YP2_home
     {
         public Dish()
         {
-            Orders = new HashSet<Order>();
+            DishInOrders = new HashSet<DishInOrder>();
         }
 
         public int IdDish { get; set; }
@@ -15,6 +15,6 @@ namespace YP2_home
         public decimal Price { get; set; }
         public string TimeDish { get; set; } = null!;
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<DishInOrder> DishInOrders { get; set; }
     }
 }

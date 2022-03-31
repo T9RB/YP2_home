@@ -15,6 +15,7 @@ public class CooksVM : ViewModelCafe
     private RelayCommand sort;
     private ObservableCollection<Order> orders = new(Helper.db.Orders.Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 4));
     private Order selorder;
+    private RelayCommand updatebutton;
     public RelayCommand Sort
     {
         get
@@ -40,6 +41,34 @@ public class CooksVM : ViewModelCafe
                        }
                        
                    }));
+        }
+
+    }
+    public RelayCommand UpdateButton
+    {
+        get
+        {
+            return updatebutton ??
+                (updatebutton = new RelayCommand((x) =>
+                {
+                    var ordespay = ColOrders;
+                    foreach (var item in ColOrders)
+                    {
+                        if (item.IdStatus == 2)
+                        {
+                            item.IdStatus = 3;
+                            Helper.db.SaveChanges();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    ColOrders = new ObservableCollection<Order>(Helper.db.Orders.Include(x => x.IdStatusNavigation)
+                            .Where(x => x.IdStatus == 3));
+                    OnPropertyChanged();
+
+                }));
         }
     }
 

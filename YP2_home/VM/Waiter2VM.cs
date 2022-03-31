@@ -12,11 +12,13 @@ public class Waiter2VM : ViewModelCafe
     private ObservableCollection<Dish> dishcCollection = new(Helper.db.Dishes);
     private RelayCommand adddish;
     private RelayCommand removedish;
+    private RelayCommand newOrder;
     private Dish dish_sel;
     private Dish dish_sel2;
-    private ObservableCollection<Dish> dish_col = new(Helper.db.Dishes);
-    public decimal sumdish = 0;
-    public decimal sumdish2 = 0;
+    private ObservableCollection<Dish> dish_col = new(Helper.db.Dishes.Where(x => x.NameDish == "dish"));
+    private ObservableCollection<DishInOrder> dish_in_order;
+    private decimal sum;
+    public decimal Sum = 0;
 
 
     public RelayCommand AddDish
@@ -34,11 +36,15 @@ public class Waiter2VM : ViewModelCafe
                        {
                            return;
                        }
+                       Sum = 0;
                        foreach (Dish item in Dish_Col)
                        {
-                           sumdish += item.Price;
+                           if (item != null)
+                           {
+                               Sum += item.Price;
+                           }
                        }
-                       sumdish2 = sumdish;
+                       Sumdish = Sum;
                        OnPropertyChanged();
                    }));
         }
@@ -51,26 +57,58 @@ public class Waiter2VM : ViewModelCafe
             return removedish ??
                 (removedish = new RelayCommand((x) =>
                 {
-                    if (Dish_Sel2 != null && Dish_Col.Count != 0)
+                    if (Dish_Sel2 != null)
                     {
                         Dish_Col.Remove(Dish_Col.FirstOrDefault(x => x.NameDish == Dish_Sel2.NameDish));
                     }
-                    if (Dish_Sel2 == null)
+                    Sum = 0;
+                    foreach (Dish item in Dish_Col)
                     {
-                        return;
-                    }
-                    if (Dish_Col.Count != 0)
-                    {
-                        foreach (Dish item in Dish_Col)
+                        if (item != null)
                         {
-                            sumdish2 -=item.Price;
+                            Sum += item.Price;
                         }
                     }
+                    Sumdish = Sum;
                     OnPropertyChanged();
                 }));
         }
     }
+    public RelayCommand NewOrder
+    {
+        get
+        {
+            return newOrder ??
+                (newOrder = new RelayCommand((x) =>
+                {
+                    if (Dish_Col.Count != 0)
+                    {
+                        Order order = new Order()
+                        {
+                            IdStatus = 1,
+                            Sum = Sum,
+                            IdUsers = Helper.id_user,
+                        };
+                        Helper.db.Orders.Add(order);
+                        Helper.db.SaveChanges();
 
+                        foreach (Dish? item  in Dish_Col)
+                        {
+                            DishInOrder dishIns = new DishInOrder()
+                            {
+                                IdDish = item.IdDish,
+                                IdOrder = Helper.db.Orders.OrderByDescending(x => x.OrderId).FirstOrDefault().OrderId,
+                            };
+                            Helper.db.DishInOrders.Add(dishIns);
+                            Helper.db.SaveChanges();
+                            new Window4().Show();
+                        }
+                        
+                    };
+                
+                }));
+        }
+    }
 
    
 
@@ -83,7 +121,15 @@ public class Waiter2VM : ViewModelCafe
             OnPropertyChanged();
         }
     }
-
+    public ObservableCollection<DishInOrder> DishInOfder
+    {
+        get => dish_in_order;
+        set
+        {
+            dish_in_order = value;
+            OnPropertyChanged();
+        }
+    }
     public Dish Dish_Sel
     {
         get => dish_sel;
@@ -120,6 +166,15 @@ public class Waiter2VM : ViewModelCafe
         {
 
             dish_col = value;
+            OnPropertyChanged();
+        }
+    }
+    public decimal Sumdish 
+    {
+        get => sum;
+        set
+        {
+            sum = value;
             OnPropertyChanged();
         }
     }

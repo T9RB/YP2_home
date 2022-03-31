@@ -8,9 +8,9 @@ namespace YP2_home;
 public class WaiterVM : ViewModelCafe
 {
     private ObservableCollection<Order> collection_ord =
-        new(Helper.db.Orders.Include(x => x.IdDishNavigation).Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 1));
+        new(Helper.db.Orders.Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 1));
 
-    private ObservableCollection<Order> payOrd = new(Helper.db.Orders.Include(x => x.IdDishNavigation)
+    private ObservableCollection<Order> payOrd = new(Helper.db.Orders
         .Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 2)); 
     private Order sOrder;
     private ObservableCollection<Dish> dish = new(Helper.db.Dishes);

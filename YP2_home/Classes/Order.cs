@@ -5,13 +5,18 @@ namespace YP2_home
 {
     public partial class Order
     {
+        public Order()
+        {
+            DishInOrders = new HashSet<DishInOrder>();
+        }
+
         public int OrderId { get; set; }
         public int IdStatus { get; set; }
-        public int IdDish { get; set; }
         public int IdUsers { get; set; }
+        public decimal Sum { get; set; }
 
-        public virtual Dish IdDishNavigation { get; set; } = null!;
         public virtual Status IdStatusNavigation { get; set; } = null!;
         public virtual User IdUsersNavigation { get; set; } = null!;
+        public virtual ICollection<DishInOrder> DishInOrders { get; set; }
     }
 }
