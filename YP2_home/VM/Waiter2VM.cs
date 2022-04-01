@@ -21,7 +21,6 @@ public class Waiter2VM : ViewModelCafe
     private decimal sum;
     public decimal Sum = 0;
 
-
     public RelayCommand AddDish
     {
         get
