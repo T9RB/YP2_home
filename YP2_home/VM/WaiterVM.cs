@@ -17,6 +17,7 @@ public class WaiterVM : ViewModelCafe
     private ObservableCollection<Dish> dish = new(Helper.db.Dishes);
     private RelayCommand upd_st;
     private RelayCommand norder;
+    private RelayCommand upd_col;
 
 
     public RelayCommand Upd_St
@@ -63,6 +64,18 @@ public class WaiterVM : ViewModelCafe
                            .Where(x => x.IdStatus == 2));
                        OnPropertyChanged();
                    }));
+        }
+    }
+    public RelayCommand Update_Col
+    {
+        get
+        {
+            return upd_col ??
+                (upd_col = new RelayCommand((x) =>
+                {
+                    Collection_ord = new ObservableCollection<Order>(Helper.db.Orders.Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 1));
+                    OnPropertyChanged();
+                }));
         }
     }
 

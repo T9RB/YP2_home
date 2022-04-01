@@ -35,12 +35,12 @@
             <TextBlock 
                 Width="309"
                 Margin="0 10 220 0"
-                ><Run Language="ru-ru" Text="Заказ"/><Run Text=":"/></TextBlock>
+                Text="Заказ"/>
             <ListBox
                 Background="FloralWhite"
                 x:Name="lb2"
-                ItemsSource="{Binding Dish_Col, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding Dish_Sel2, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Dish_Col}"
+                SelectedItem="{Binding Dish_Sel2}"
             Height="227" Width="278">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

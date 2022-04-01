@@ -72,17 +72,24 @@
             Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="386,115,0,222">
             <Button Height="30" 
                     Width="100"
-                    Margin="0 25 160 0"
+                    Margin="0 25 10 0"
                     Command="{Binding Upd_St}"
                     Content="Изменить статус"
                     Background="FloralWhite"/>
             <Button 
                 Height="30"
                 Width="100"
-                Margin="150 -30 0 0"
+                Margin="280 -30 0 0"
                 Content="Добавить"
                 Command="{Binding NOrder}"
                 Background="FloralWhite"/>
+            <Button 
+                Height="30"
+                Width="100"
+                Margin="0 -30 280 0"
+                Content="Обновить"
+                Background="FloralWhite"
+                Command="{Binding Update_Col}"/>
 
 
         </StackPanel>

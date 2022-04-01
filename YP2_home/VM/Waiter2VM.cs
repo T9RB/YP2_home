@@ -68,7 +68,6 @@ public class Waiter2VM : ViewModelCafe
                     }
                     if(Dish_Sel2 == null)
                     {
-                        //MessageBox.Show("Выберите заказ, чтобы его удалить");
                         return;
                     }
 
@@ -81,6 +80,7 @@ public class Waiter2VM : ViewModelCafe
                         }
                     }
                     Sumdish = Sum;
+
                     OnPropertyChanged();
                 }));
         }
