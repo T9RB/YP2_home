@@ -63,11 +63,16 @@ public class Waiter2VM : ViewModelCafe
                     {
                         Dish_Col.Remove(Dish_Col.FirstOrDefault(x => x.IdDish == Dish_Sel2.IdDish));
                     }
+                    else if (Dish_Col.Count == 1)
+                    {
+                        Dish_Col.Clear();
+                    }
                     if(Dish_Sel2 == null)
                     {
-                        MessageBox.Show("Выберите заказ, чтобы его удалить");
+                        //MessageBox.Show("Выберите заказ, чтобы его удалить");
                         return;
-                    }`
+                    }
+
                     Sum = 0;
                     foreach (Dish item in Dish_Col)
                     {

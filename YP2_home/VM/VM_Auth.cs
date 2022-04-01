@@ -33,7 +33,6 @@ public class VM_Auth : ViewModelCafe
                        {
                            new Window1().Show();
                            Helper.id_user = 1;
-                           new MainWindow().Hide();
                            Ac_auth = command;
                            OnPropertyChanged();
                        }
@@ -42,7 +41,6 @@ public class VM_Auth : ViewModelCafe
                        {
                            new Window2().Show();
                            Helper.id_user = 2;
-                           new MainWindow().Hide();
                            Ac_auth = command;
                            OnPropertyChanged();
                        }
