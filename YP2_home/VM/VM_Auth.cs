@@ -2,16 +2,54 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Mime;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 namespace YP2_home;
 
 public class VM_Auth : ViewModelCafe
 {
-    private ObservableCollection<User> selUsers;
     private string login;
     private string password;
+    private string ac_auth = "Войти";
     private RelayCommand auth;
 
+    public RelayCommand Auth
+    {
+        get
+        {
+            return auth ??
+                   (auth = new RelayCommand((x) =>
+                   {
+                       string command = "Вы вошли";
+                       var selUs = Helper.db.Users.FirstOrDefault(x => x.LoginUs == Login && x.PasswordUs == Password);
+
+                       if (selUs == null)
+                       {
+                           MessageBox.Show("Неверный логин или пароль");
+                           return;
+                       }
+
+                       if (selUs.IdRole == 1)
+                       {
+                           new Window1().Show();
+                           Helper.id_user = 1;
+                           new MainWindow().Hide();
+                           Ac_auth = command;
+                           OnPropertyChanged();
+                       }
+
+                       if (selUs.IdRole == 2)
+                       {
+                           new Window2().Show();
+                           Helper.id_user = 2;
+                           new MainWindow().Hide();
+                           Ac_auth = command;
+                           OnPropertyChanged();
+                       }
+                       
+                   }));
+        }
+    }
     public string Login
     {
         get => login;
@@ -28,42 +66,13 @@ public class VM_Auth : ViewModelCafe
             password = value;
         }
     }
-    public RelayCommand Auth
+    public string Ac_auth
     {
-        get
+        get => ac_auth;
+        set
         {
-            return auth ??
-                   (auth = new RelayCommand((x) =>
-                   {
-
-                       var selUs = Helper.db.Users.FirstOrDefault(x => x.LoginUs == Login && x.PasswordUs == Password);
-
-                       if (selUs == null)
-                       {
-                           return;
-                       }
-
-                       if (selUs.IdRole == 1)
-                       {
-                           new Window1().Show();
-                           Helper.id_user = 1;
-                       }
-
-                       if (selUs.IdRole == 2)
-                       {
-                           new Window2().Show();
-                           Helper.id_user = 2;
-                       }
-                       
-                           
-
-                           
-                       
-                       
-
-
-                   }));
+            ac_auth = value;
+            OnPropertyChanged();
         }
     }
-
 }

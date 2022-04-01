@@ -9,10 +9,12 @@
     <Window.Resources>
         <local:Waiter2VM x:Key="Waiter"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource Waiter}">
+    <Grid DataContext="{StaticResource Waiter}"
+          Background="LightGray">
         <ListBox Margin="0,10,351,0"
                  ItemsSource="{Binding DishCollection, UpdateSourceTrigger=PropertyChanged}"
-                 SelectedItem="{Binding Dish_Sel, UpdateSourceTrigger=PropertyChanged}">
+                 SelectedItem="{Binding Dish_Sel, UpdateSourceTrigger=PropertyChanged}"
+                 Background="FloralWhite">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="10">
@@ -28,12 +30,14 @@
             </ListBox.ItemTemplate>
 
         </ListBox>
-        <StackPanel Margin="315,0,0,10">
+        <StackPanel Margin="315,0,0,10"
+                    Background="FloralWhite">
             <TextBlock 
                 Width="309"
                 Margin="0 10 220 0"
                 ><Run Language="ru-ru" Text="Заказ"/><Run Text=":"/></TextBlock>
             <ListBox
+                Background="FloralWhite"
                 x:Name="lb2"
                 ItemsSource="{Binding Dish_Col, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding Dish_Sel2, UpdateSourceTrigger=PropertyChanged}"
@@ -51,23 +55,33 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBlock Text="Цена:"/>
-            <TextBlock Text="{Binding Sumdish, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Цена:"
+                       Background="FloralWhite"/>
+            <TextBlock Text="{Binding Sumdish, UpdateSourceTrigger=PropertyChanged}"
+                       Background="FloralWhite" 
+                       Width="208"
+                       Margin="0 0 73 0"/>
+            <TextBlock Width="68"
+                       Margin="210 -15 0 0"
+                       Text="Руб."/>
         </StackPanel>
         <StackPanel Margin="254,84,290,72" Orientation="Vertical">
-            <Button 
+            <Button
+                Background="FloralWhite"
                 Width="30"
                 Height="30"
                 Content="+"
                 Margin="0 0 0 0"
                 Command="{Binding AddDish}"/>
-            <Button 
+            <Button
+                Background="FloralWhite"
                 Width="30"
                 Height="30"
                 Content="-"
                 Margin="0 30 0 0"
                 Command="{Binding RemoveDish}"/>
-            <Button 
+            <Button
+                Background="FloralWhite"
                 Width="34"
                 Height="30"
                 Content="Заказ"

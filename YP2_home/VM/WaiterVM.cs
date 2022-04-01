@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Linq;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 namespace YP2_home;
 
@@ -28,6 +29,7 @@ public class WaiterVM : ViewModelCafe
                        var order_st = SOrder;
                        if (order_st == null)
                        {
+                           MessageBox.Show("Выберите заказ, чтобы изменить статус.");
                            return;
                        }
 

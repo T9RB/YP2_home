@@ -25,5 +25,6 @@ namespace YP2_home
             InitializeComponent();
             DataContext = new VM_Auth();
         }
+
     }
 }

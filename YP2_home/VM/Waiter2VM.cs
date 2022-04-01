@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using System.Windows;
 
 namespace YP2_home;
 
@@ -34,6 +35,7 @@ public class Waiter2VM : ViewModelCafe
                        }
                        if (Dish_Sel == null)
                        {
+                           MessageBox.Show("Вы не выбрали блюда!");
                            return;
                        }
                        Sum = 0;
@@ -59,8 +61,13 @@ public class Waiter2VM : ViewModelCafe
                 {
                     if (Dish_Sel2 != null)
                     {
-                        Dish_Col.Remove(Dish_Col.FirstOrDefault(x => x.NameDish == Dish_Sel2.NameDish));
+                        Dish_Col.Remove(Dish_Col.FirstOrDefault(x => x.IdDish == Dish_Sel2.IdDish));
                     }
+                    if(Dish_Sel2 == null)
+                    {
+                        MessageBox.Show("Выберите заказ, чтобы его удалить");
+                        return;
+                    }`
                     Sum = 0;
                     foreach (Dish item in Dish_Col)
                     {
@@ -94,18 +101,22 @@ public class Waiter2VM : ViewModelCafe
 
                         foreach (Dish? item  in Dish_Col)
                         {
-                            DishInOrder dishIns = new DishInOrder()
+                            DishInOrder dishIns = new()
                             {
                                 IdDish = item.IdDish,
-                                IdOrder = Helper.db.Orders.OrderByDescending(x => x.OrderId).FirstOrDefault().OrderId,
+                                IdOrder = Helper.db.Orders.OrderByDescending(x => x.OrderId).FirstOrDefault().OrderId, //Сортировка по убыванию ID, поиск первого (по условию) OrderID
                             };
                             Helper.db.DishInOrders.Add(dishIns);
                             Helper.db.SaveChanges();
-                            new Window4().Show();
                         }
-                        
-                    };
-                
+                        MessageBox.Show("Заказ добавлен.");
+                    }
+                     else
+                     {
+                        MessageBox.Show("Вы не выбрали блюда.");
+                        return;
+                     }
+
                 }));
         }
     }

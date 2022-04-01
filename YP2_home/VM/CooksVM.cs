@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -26,6 +27,7 @@ public class CooksVM : ViewModelCafe
                        var order_st = SelectedOrder;
                        if (order_st == null)
                        {
+                           MessageBox.Show("Выберите заказ!");
                            return;
                        }
 

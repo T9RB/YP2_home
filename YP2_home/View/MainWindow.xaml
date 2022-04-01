@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YP2_home"
         mc:Ignorable="d"
-        Title="Авторизация" Height="300" Width="500">
+        Title="Авторизация" Height="300" Width="500" Background="LightGray">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
@@ -20,17 +20,22 @@
             <StackPanel>
                 <TextBlock Text="Авторизация" TextAlignment="Center" Margin="0 0 0 10"/>
                 <DockPanel LastChildFill="True" Margin="0,0,0,15">
-                    <TextBlock Text="Логин:   " />
-                    <TextBox x:Name="Log_Box" Text="{Binding Login }"/>
+                    <TextBlock Text="Логин:   " 
+                               Background="FloralWhite"/>
+                    <TextBox x:Name="Log_Box" Text="{Binding Login }"
+                             Background="FloralWhite"/>
                 </DockPanel>
                 <DockPanel LastChildFill="True" Margin="0 0 0 15">
-                    <TextBlock Text="Пароль: "/>
-                    <TextBox Name="PassBox" Text="{Binding Password}"/>
+                    <TextBlock Text="Пароль: "
+                               Background="FloralWhite"/>
+                    <TextBox Name="PassBox" Text="{Binding Password}"
+                             Background="FloralWhite"/>
                 </DockPanel>
                 <Button 
                     x:Name="Button1" 
-                    Content="Войти" 
-                    Command="{Binding Auth}"/>
+                    Content="{Binding Ac_auth}" 
+                    Command="{Binding Auth}"
+                    Background="FloralWhite"/>
             </StackPanel>
         </Border>
     </Grid>
