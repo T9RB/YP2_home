@@ -20,7 +20,7 @@ public class Waiter2VM : ViewModelCafe
     private ObservableCollection<DishInOrder> dish_in_order;
     private decimal sum;
     public decimal Sum = 0;
-
+    //zxc
     public RelayCommand AddDish
     {
         get
