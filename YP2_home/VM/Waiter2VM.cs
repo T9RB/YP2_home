@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Windows;
 
 namespace YP2_home;
@@ -21,11 +19,7 @@ public class Waiter2VM : ViewModelCafe
     private decimal sum;
     public decimal Sum = 0;
     //zxc
-    public RelayCommand AddDish
-    {
-        get
-        {
-            return adddish ??
+    public RelayCommand AddDish => adddish ??
                    (adddish = new RelayCommand((x) =>
                    {
                        if (Dish_Sel != null)
@@ -48,14 +42,7 @@ public class Waiter2VM : ViewModelCafe
                        Sumdish = Sum;
                        OnPropertyChanged();
                    }));
-        }
-
-    }
-    public RelayCommand RemoveDish
-    {
-        get
-        {
-            return removedish ??
+    public RelayCommand RemoveDish => removedish ??
                 (removedish = new RelayCommand((x) =>
                 {
                     if (Dish_Sel2 != null)
@@ -66,7 +53,7 @@ public class Waiter2VM : ViewModelCafe
                     {
                         Dish_Col.Clear();
                     }
-                    if(Dish_Sel2 == null)
+                    if (Dish_Sel2 == null)
                     {
                         return;
                     }
@@ -83,13 +70,7 @@ public class Waiter2VM : ViewModelCafe
 
                     OnPropertyChanged();
                 }));
-        }
-    }
-    public RelayCommand NewOrder
-    {
-        get
-        {
-            return newOrder ??
+    public RelayCommand NewOrder => newOrder ??
                 (newOrder = new RelayCommand((x) =>
                 {
                     if (Dish_Col.Count != 0)
@@ -103,7 +84,7 @@ public class Waiter2VM : ViewModelCafe
                         Helper.db.Orders.Add(order);
                         Helper.db.SaveChanges();
 
-                        foreach (Dish? item  in Dish_Col)
+                        foreach (Dish? item in Dish_Col)
                         {
                             DishInOrder dishIns = new()
                             {
@@ -115,17 +96,15 @@ public class Waiter2VM : ViewModelCafe
                         }
                         MessageBox.Show("Заказ добавлен.");
                     }
-                     else
-                     {
+                    else
+                    {
                         MessageBox.Show("Вы не выбрали блюда.");
                         return;
-                     }
+                    }
 
                 }));
-        }
-    }
 
-   
+
 
     public Dish Dish_Sel2
     {
@@ -164,7 +143,7 @@ public class Waiter2VM : ViewModelCafe
             OnPropertyChanged();
         }
     }
-    
+
     public ObservableCollection<Dish> DishCollection
     {
         get => dishcCollection;
@@ -184,7 +163,7 @@ public class Waiter2VM : ViewModelCafe
             OnPropertyChanged();
         }
     }
-    public decimal Sumdish 
+    public decimal Sumdish
     {
         get => sum;
         set

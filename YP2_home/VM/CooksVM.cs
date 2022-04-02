@@ -1,30 +1,21 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace YP2_home;
 
-public class CooksVM : ViewModelCafe 
+public class CooksVM : ViewModelCafe
 {
-    private ObservableCollection<Order> selOrder = new (Helper.db.Orders.Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 3 || x.IdStatus == 2));
+    private ObservableCollection<Order> selOrder = new(Helper.db.Orders.Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 3 || x.IdStatus == 2));
     private RelayCommand sort;
     private ObservableCollection<Order> orders = new(Helper.db.Orders.Include(x => x.IdStatusNavigation).Where(x => x.IdStatus == 4));
     private Order selorder;
     private RelayCommand updatebutton;
-    public RelayCommand Sort
-    {
-        get
-        {
-            return sort ??
+    public RelayCommand Sort => sort ??
                    (sort = new RelayCommand((x) =>
                    {
-                       var order_st = SelectedOrder;
+                       Order? order_st = SelectedOrder;
                        if (order_st == null)
                        {
                            MessageBox.Show("Выберите заказ!");
@@ -41,20 +32,13 @@ public class CooksVM : ViewModelCafe
                                .Where(x => x.IdStatus == 4));
                            OnPropertyChanged();
                        }
-                       
-                   }));
-        }
 
-    }
-    public RelayCommand UpdateButton
-    {
-        get
-        {
-            return updatebutton ??
+                   }));
+    public RelayCommand UpdateButton => updatebutton ??
                 (updatebutton = new RelayCommand((x) =>
                 {
-                    var ordespay = ColOrders;
-                    foreach (var item in ColOrders)
+                    ObservableCollection<Order>? ordespay = ColOrders;
+                    foreach (Order? item in ColOrders)
                     {
                         if (item.IdStatus == 2)
                         {
@@ -71,8 +55,6 @@ public class CooksVM : ViewModelCafe
                     OnPropertyChanged();
 
                 }));
-        }
-    }
 
     public Order SelectedOrder
     {

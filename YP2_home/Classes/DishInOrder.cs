@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace YP2_home
+﻿namespace YP2_home
 {
     public partial class DishInOrder
     {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Mime;
+﻿using System.Linq;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
 namespace YP2_home;
 
 public class VM_Auth : ViewModelCafe
@@ -13,15 +9,11 @@ public class VM_Auth : ViewModelCafe
     private string ac_auth = "Войти";
     private RelayCommand auth;
 
-    public RelayCommand Auth
-    {
-        get
-        {
-            return auth ??
+    public RelayCommand Auth => auth ??
                    (auth = new RelayCommand((x) =>
                    {
                        string command = "Вы вошли";
-                       var selUs = Helper.db.Users.FirstOrDefault(x => x.LoginUs == Login && x.PasswordUs == Password);
+                       User? selUs = Helper.db.Users.FirstOrDefault(x => x.LoginUs == Login && x.PasswordUs == Password);
 
                        if (selUs == null)
                        {
@@ -44,25 +36,17 @@ public class VM_Auth : ViewModelCafe
                            Ac_auth = command;
                            OnPropertyChanged();
                        }
-                       
+
                    }));
-        }
-    }
     public string Login
     {
         get => login;
-        set
-        {
-            login = value;
-        }
+        set => login = value;
     }
     public string Password
     {
         get => password;
-        set
-        {
-            password = value;
-        }
+        set => password = value;
     }
     public string Ac_auth
     {
