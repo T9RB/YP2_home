@@ -36,17 +36,27 @@ public class VM_Auth : ViewModelCafe
                            Ac_auth = command;
                            OnPropertyChanged();
                        }
+                       
 
                    }));
     public string Login
     {
         get => login;
-        set => login = value;
+        set
+        {
+            login = value;
+            OnPropertyChanged();
+        }
+        
     }
     public string Password
     {
         get => password;
-        set => password = value;
+        set
+        {
+            password = value;
+            OnPropertyChanged();
+        }
     }
     public string Ac_auth
     {

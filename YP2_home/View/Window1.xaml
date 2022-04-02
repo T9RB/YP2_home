@@ -61,32 +61,20 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel DataContext="{Binding SelectedOrder}" 
-                    Margin="386,150,2,0" Grid.ColumnSpan="2">
-            <TextBlock Text="Выбранный заказ"  />
-            <TextBlock x:Name="tb1" Text="Номер: " />
-            <TextBox x:Name="tb2" 
-                     Text="{Binding OrderId, UpdateSourceTrigger=PropertyChanged}" 
-                     Background="FloralWhite"/>
-            <TextBlock 
-                Text="Статус: " />
-            <TextBox 
-                Text="{Binding IdStatusNavigation.NameStatus, UpdateSourceTrigger=PropertyChanged}" 
-                Background="FloralWhite"/>
-        </StackPanel>
+
         <StackPanel 
-            Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="386,252,0,69">
+            Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="387,138,-1,183">
             <Button Height="30" 
                     Width="100"
                     Margin="150 30 0 0"
                     Command="{Binding Sort}"
-                    Content="Изменить статус"
+                    Content="Готово"
                     Background="FloralWhite"/>
             <Button 
                 Height="30"
                 Width="100"
                 Margin="0 -30 150 0"
-                Content="Обновить список"
+                Content="Готовится"
                 Command="{Binding UpdateButton}"
                 Background="FloralWhite"/>
 

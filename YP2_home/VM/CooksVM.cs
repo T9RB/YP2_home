@@ -37,22 +37,23 @@ public class CooksVM : ViewModelCafe
     public RelayCommand UpdateButton => updatebutton ??
                 (updatebutton = new RelayCommand((x) =>
                 {
-                    ObservableCollection<Order>? ordespay = ColOrders;
-                    foreach (Order? item in ColOrders)
+                    Order? order_st = SelectedOrder;
+                    if (order_st == null)
                     {
-                        if (item.IdStatus == 2)
-                        {
-                            item.IdStatus = 3;
-                            Helper.db.SaveChanges();
-                        }
-                        else
-                        {
-                            continue;
-                        }
+                        MessageBox.Show("Выберите заказ!");
+                        return;
                     }
-                    ColOrders = new ObservableCollection<Order>(Helper.db.Orders.Include(x => x.IdStatusNavigation)
+
+                    if (order_st != null)
+                    {
+                        order_st.IdStatus = 3;
+                        Helper.db.SaveChanges();
+                        ColOrders = new ObservableCollection<Order>(Helper.db.Orders.Include(x => x.IdStatusNavigation)
                             .Where(x => x.IdStatus == 3));
-                    OnPropertyChanged();
+                        NewOrders = new ObservableCollection<Order>(Helper.db.Orders.Include(x => x.IdStatusNavigation)
+                            .Where(x => x.IdStatus == 4));
+                        OnPropertyChanged();
+                    }
 
                 }));
 
